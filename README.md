@@ -6,17 +6,12 @@
 📍 This repository contains my structured learning path and solved problems based on Shradha Didi’s DSA Playlist in C++, with full dedication to cracking interviews, contests, and building strong problem-solving skills.
 
 🧑‍💻 About Me
-Hi, I'm Vikash Gupta 👨‍💻
-
-📚 B.Tech CSE Student
-
+Hi, I'm Tanush Tiwari
 🧠 Passionate about DSA, OS, and Dev Projects
 
 💡 Exploring modern tech stacks like Web3, MongoDB, and building real-life platforms
 
 🚀 Active participant in Hackathons and Open Source
-
-💻 GitHub Profile: vikashgupta16
 
 📂 Repository Structure
 This repository is organized topic-wise, matching Shradha Didi’s playlist. Each topic contains:
@@ -29,20 +24,7 @@ This repository is organized topic-wise, matching Shradha Didi’s playlist. Eac
 
 🚀 Frequently used patterns
 
-Copy
-Edit
-📁 Shradha-Ma-am-DSA
-├── Lecture1
-├── Lecture2
-├── Lecture3
-├── Lecture4
-├── Lecture5
-├── Lecture6
-├── Lecture7
-├── Lecture8
-├── 09_Vector
-├── 10_DynamicProgramming
-└── README.md
+
 📚 Resources Used
 📺 YouTube Playlist by Shradha Didi (Apna College)
 DSA in C++ – Full Playlist
