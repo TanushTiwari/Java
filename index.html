@@ -889,6 +889,158 @@ public class simple {
     }
 }`,
 
+            'Pattern/Char.java': `package Pattern;
+
+public class Char {
+    public static void main(String[] args) {
+        char ch = 'A';
+        for (int line = 1; line <= 4; line++) {
+            for (int chars = 1; chars <= line; chars++) {
+                System.out.print(ch);
+                ch++;
+            }
+            System.out.println();
+        }
+    }
+}`,
+
+            'String/stringBuilder.java': `package String;
+
+public class stringBuilder {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Tony");
+        System.out.println(sb);
+        
+        // char at index 0
+        System.out.println(sb.charAt(0));
+        
+        // set char at index 0
+        sb.setCharAt(0, 'P');
+        System.out.println(sb);
+        
+        // insert
+        sb.insert(0, 'S');
+        System.out.println(sb);
+        
+        // delete the extra 'n'
+        sb.delete(2, 3);
+        System.out.println(sb);
+    }
+}`,
+
+            'String/toUpper.java': `package String;
+
+public class toUpper {
+    public static String toUpperCase(String str) {
+        StringBuilder sb = new StringBuilder("");
+        
+        char ch = Character.toUpperCase(str.charAt(0));
+        sb.append(ch);
+        
+        for (int i = 1; i < str.length(); i++) {
+            if (str.charAt(i) == ' ' && i < str.length() - 1) {
+                sb.append(str.charAt(i));
+                i++;
+                sb.append(Character.toUpperCase(str.charAt(i)));
+            } else {
+                sb.append(str.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
+    
+    public static void main(String[] args) {
+        String str = "hi, i am shradha";
+        System.out.println(toUpperCase(str));
+    }
+}`,
+
+            'Array/arrayCC.java': `package Array;
+
+import java.util.*;
+
+public class arrayCC {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        int numbers[] = new int[size];
+        
+        // input
+        for (int i = 0; i < size; i++) {
+            numbers[i] = sc.nextInt();
+        }
+        
+        // output
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.print(numbers[i] + " ");
+        }
+        sc.close();
+    }
+}`,
+
+            'Array/buySellStock.java': `package Array;
+
+public class buySellStock {
+    public static int buyAndSellStocks(int prices[]) {
+        int buyPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        
+        for (int i = 0; i < prices.length; i++) {
+            if (buyPrice < prices[i]) { // profit
+                int profit = prices[i] - buyPrice; // today's profit
+                maxProfit = Math.max(maxProfit, profit);
+            } else {
+                buyPrice = prices[i];
+            }
+        }
+        return maxProfit;
+    }
+    
+    public static void main(String[] args) {
+        int prices[] = {7, 1, 5, 3, 6, 4};
+        System.out.println(buyAndSellStocks(prices));
+    }
+}`,
+
+            'Sorting/counting.java': `package Sorting;
+
+public class counting {
+    public static void countingSort(int arr[]) {
+        int largest = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            largest = Math.max(largest, arr[i]);
+        }
+        
+        int count[] = new int[largest + 1];
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]]++;
+        }
+        
+        // sorting
+        int j = 0;
+        for (int i = 0; i < count.length; i++) {
+            while (count[i] > 0) {
+                arr[j] = i;
+                j++;
+                count[i]--;
+            }
+        }
+    }
+    
+    public static void printArr(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        int arr[] = {1, 4, 1, 3, 2, 4, 3, 7};
+        countingSort(arr);
+        printArr(arr);
+    }
+}`,
+
             'TwoDArray/matrix.java': `package TwoDArray;
 
 import java.util.*;
@@ -936,55 +1088,100 @@ public class matrix {
 }`
         };
 
-        // Program data
+        // Program data with all your repository programs
         const programs = {
             array: [
-                {name: "Binary Search", file: "Array/binary.java", desc: "Binary search with sorting implementation"},
+                {name: "Array CC", file: "Array/arrayCC.java", desc: "Array operations and calculations"},
+                {name: "Binary Search", file: "Array/binary.java", desc: "Binary search implementation"},
+                {name: "Buy Sell Stock", file: "Array/buySellStock.java", desc: "Stock trading algorithm"},
+                {name: "Kadane's Algorithm", file: "Array/kadane.java", desc: "Maximum subarray sum problem"},
                 {name: "Largest Element", file: "Array/largest.java", desc: "Find largest and smallest elements"},
                 {name: "Linear Search", file: "Array/linearSearch.java", desc: "Linear search algorithm"},
-                {name: "Kadane's Algorithm", file: "Array/kadane.java", desc: "Maximum subarray problem"},
+                {name: "Max Sub Array", file: "Array/maxSubArr.java", desc: "Maximum subarray operations"},
+                {name: "Min Sub Array", file: "Array/minSubArr.java", desc: "Minimum subarray operations"},
+                {name: "Pair Operations", file: "Array/pair.java", desc: "Array pair operations"},
                 {name: "Reverse Array", file: "Array/rev.java", desc: "Array reversal algorithm"},
+                {name: "Sub Arrays", file: "Array/subArray.java", desc: "Subarray operations"},
+                {name: "Trapping Rain Water", file: "Array/trappRainWater.java", desc: "Rain water trapping algorithm"}
             ],
             string: [
-                {name: "Palindrome Check", file: "String/palindrome.java", desc: "Check if string is palindrome"},
-                {name: "String Compression", file: "String/compress.java", desc: "Compress repeated characters"},
+                {name: "String Compression", file: "String/compress.java", desc: "String compression algorithm"},
                 {name: "Largest String", file: "String/largest.java", desc: "Find lexicographically largest string"},
+                {name: "Lexicographical Order", file: "String/lexicography.java", desc: "String comparison operations"},
+                {name: "Palindrome Check", file: "String/palindrome.java", desc: "Check if string is palindrome"},
+                {name: "Path Finder", file: "String/pathFinderDirection.java", desc: "Direction path finding algorithm"},
+                {name: "String Builder", file: "String/stringBuilder.java", desc: "StringBuilder operations"},
                 {name: "String Operations", file: "String/strings.java", desc: "Basic string operations and methods"},
+                {name: "To Uppercase", file: "String/toUpper.java", desc: "Convert string to uppercase"}
             ],
             sorting: [
                 {name: "Bubble Sort", file: "Sorting/Bubble.java", desc: "Bubble sort algorithm implementation"},
+                {name: "Counting Sort", file: "Sorting/counting.java", desc: "Counting sort algorithm"},
+                {name: "Inbuilt Sort", file: "Sorting/inbuilt.java", desc: "Java built-in sort methods"},
+                {name: "Inbuilt Sort 2", file: "Sorting/inBuilt2.java", desc: "Advanced built-in sorting"},
                 {name: "Insertion Sort", file: "Sorting/insertion.java", desc: "Insertion sort algorithm"},
-                {name: "Selection Sort", file: "Sorting/selessctionSort.java", desc: "Selection sort algorithm"},
+                {name: "Selection Sort", file: "Sorting/selessctionSort.java", desc: "Selection sort algorithm"}
             ],
             pattern: [
+                {name: "Character Pattern", file: "Pattern/Char.java", desc: "Character-based patterns"},
+                {name: "Reverse Pattern", file: "Pattern/revpatter.java", desc: "Reverse pattern designs"},
+                {name: "Series Pattern", file: "Pattern/series.java", desc: "Number series patterns"},
                 {name: "Simple Pattern", file: "Pattern/simple.java", desc: "Basic star and number patterns"},
+                {name: "Butterfly Pattern", file: "PatternAdvance/butterFly.java", desc: "Beautiful butterfly pattern"},
+                {name: "Diamond Pattern", file: "PatternAdvance/diamond.java", desc: "Diamond shape pattern"},
+                {name: "Floyd's Triangle", file: "PatternAdvance/flyods.java", desc: "Floyd's triangle pattern"},
+                {name: "Hollow Rhombus", file: "PatternAdvance/hollowrhombus.java", desc: "Hollow rhombus pattern"},
+                {name: "Hollow Pattern", file: "PatternAdvance/holow.java", desc: "Various hollow patterns"},
+                {name: "Inverted Half Pyramid", file: "PatternAdvance/invHalf.java", desc: "Inverted half pyramid"},
+                {name: "Inverted Rotated", file: "PatternAdvance/invRot.java", desc: "Inverted rotated patterns"},
+                {name: "Rhombus Pattern", file: "PatternAdvance/rhombus.java", desc: "Rhombus shape pattern"},
+                {name: "Triangle O Pattern", file: "PatternAdvance/triO.java", desc: "Triangle with O pattern"}
             ],
             "2darray": [
+                {name: "Diagonal Matrix", file: "TwoDArray/diagonalMatrix.java", desc: "Matrix diagonal operations"},
                 {name: "Matrix Operations", file: "TwoDArray/matrix.java", desc: "Basic matrix operations and search"},
+                {name: "Search in Matrix", file: "TwoDArray/searchMatrix.java", desc: "Matrix search algorithms"},
+                {name: "Search Matrix V2", file: "TwoDArray/searchMatrixTwo.java", desc: "Advanced matrix search"},
+                {name: "Small Large Matrix", file: "TwoDArray/smallLargMatrix.java", desc: "Find min/max in matrix"},
+                {name: "Spiral Matrix", file: "TwoDArray/spiralMatrix.java", desc: "Spiral matrix traversal"}
             ],
             bit: [
+                {name: "Bit Manipulation", file: "BitManipulation/BitManioulation.java", desc: "Basic bit manipulation operations"},
                 {name: "Even/Odd Check", file: "BitManipulation/even.java", desc: "Check even/odd using bit manipulation"},
+                {name: "Update Bit", file: "BitManipulation/update.java", desc: "Update specific bit positions"}
             ],
             oop: [
                 {name: "Objects & Classes", file: "OOPs/objects.java", desc: "Basic OOP concepts with Pen and Student classes"}
             ]
         };
 
-        // View code function - Updated for GitHub Pages
+        // View code function - Updated to use GitHub API
         async function viewCode(filePath) {
             const modal = document.getElementById('codeModal');
             const title = document.getElementById('modalTitle');
             const content = document.getElementById('codeContent');
 
             title.textContent = `Source Code - ${filePath}`;
+            content.textContent = 'Loading code from GitHub...';
             modal.style.display = 'block';
 
-            // Get code from embedded database
-            const code = codeDatabase[filePath];
-            if (code) {
-                content.textContent = code;
-            } else {
-                content.textContent = `// Code for ${filePath} not available\n// Add your code to the codeDatabase object`;
+            try {
+                // Use GitHub API to fetch file content
+                const apiUrl = `https://api.github.com/repos/TanushTiwari/Java/contents/${filePath}`;
+                const response = await fetch(apiUrl);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    // GitHub API returns base64 encoded content
+                    const code = atob(data.content);
+                    content.textContent = code;
+                } else if (response.status === 404) {
+                    content.textContent = `// File not found: ${filePath}\n// Please check if the file exists in your repository`;
+                } else {
+                    content.textContent = `// Error loading file: ${filePath}\n// HTTP Status: ${response.status}`;
+                }
+            } catch (error) {
+                content.textContent = `// Network error loading file: ${filePath}\n// Error: ${error.message}\n// Make sure you have internet connection`;
             }
         }
 
@@ -1008,12 +1205,22 @@ public class matrix {
             }
         }
 
-        // Load programs for a category
+        // Load programs for a category - FIXED VERSION
         function loadPrograms(category) {
             const container = document.getElementById(category + '-programs');
-            if (!container || container.innerHTML.trim() !== '') return;
+            if (!container) {
+                console.log('Container not found for category:', category);
+                return;
+            }
 
             const categoryPrograms = programs[category] || [];
+            console.log('Loading programs for category:', category, 'Count:', categoryPrograms.length);
+            
+            if (categoryPrograms.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">No programs available in this category yet.</div>';
+                return;
+            }
+
             container.innerHTML = categoryPrograms.map(program => `
                 <div class="program-card">
                     <div class="program-title">${program.name}</div>
@@ -1107,9 +1314,16 @@ public class matrix {
             }
         }
 
-        // Initialize
+        // Initialize - Load programs for all categories
         document.addEventListener('DOMContentLoaded', function() {
-            loadPrograms('array');
+            console.log('Page loaded, initializing programs...');
+            
+            // Load programs for all categories
+            Object.keys(programs).forEach(category => {
+                loadPrograms(category);
+            });
+            
+            console.log('All programs loaded!');
         });
     </script>
 </body>
