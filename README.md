@@ -6,7 +6,7 @@
 📍 This repository contains my structured learning path and solved problems based on Shradha Didi’s DSA Playlist in C++, with full dedication to building strong problem-solving skills.
 
 🧑‍💻 About Me
-Hi, I'm Tanush Tiwari
+Hi, I'm Tanush Tiwari(Vikash)
 🧠 Passionate about DSA
 
 📂 Repository Structure
