@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Programs Portal - Static Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: transparent;
+            color: #4a5568;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .program-desc {
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-view {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .code-content {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            background: #f7fafc;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-banner {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 DSA Programs Portal</h1>
+            <p class="subtitle">Comprehensive collection of Data Structures and Algorithms programs</p>
+            <div class="status-banner">
+                ✅ Ready for deployment - All code embedded locally
+            </div>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+            <button class="tab-btn" onclick="showTab('array')">Arrays</button>
+            <button class="tab-btn" onclick="showTab('string')">Strings</button>
+            <button class="tab-btn" onclick="showTab('sorting')">Sorting</button>
+            <button class="tab-btn" onclick="showTab('pattern')">Patterns</button>
+            <button class="tab-btn" onclick="showTab('2darray')">2D Arrays</button>
+            <button class="tab-btn" onclick="showTab('bit')">Bit Manipulation</button>
+            <button class="tab-btn" onclick="showTab('oop')">OOP</button>
+        </nav>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <h2>📊 Program Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div>Array Programs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div>String Programs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div>Sorting Algorithms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">13</div>
+                    <div>Pattern Programs</div>
+                </div>
+            </div>
+            
+            <h3>🌟 Featured Programs</h3>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-title">🔍 Binary Search</div>
+                    <div class="program-desc">Efficient binary search algorithm implementation</div>
+                    <div class="card-actions">
+                        <button class="btn btn-view" onclick="viewCode('Array/binary.java')">View Code</button>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-title">📈 Kadane's Algorithm</div>
+                    <div class="program-desc">Maximum subarray sum using dynamic programming</div>
+                    <div class="card-actions">
+                        <button class="btn btn-view" onclick="viewCode('Array/kadane.java')">View Code</button>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-title">🏗️ Objects & Classes</div>
+                    <div class="program-desc">Basic OOP concepts with practical examples</div>
+                    <div class="card-actions">
+                        <button class="btn btn-view" onclick="viewCode('OOPs/objects.java')">View Code</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other tabs will be dynamically populated -->
+        <div id="array" class="tab-content">
+            <h2>📊 Array Programs</h2>
+            <div class="programs-grid" id="array-programs"></div>
+        </div>
+
+        <div id="string" class="tab-content">
+            <h2>🔤 String Programs</h2>
+            <div class="programs-grid" id="string-programs"></div>
+        </div>
+
+        <div id="sorting" class="tab-content">
+            <h2>🔄 Sorting Algorithms</h2>
+            <div class="programs-grid" id="sorting-programs"></div>
+        </div>
+
+        <div id="pattern" class="tab-content">
+            <h2>⭐ Pattern Programs</h2>
+            <div class="programs-grid" id="pattern-programs"></div>
+        </div>
+
+        <div id="2darray" class="tab-content">
+            <h2>🎯 2D Array Programs</h2>
+            <div class="programs-grid" id="2darray-programs"></div>
+        </div>
+
+        <div id="bit" class="tab-content">
+            <h2>💻 Bit Manipulation</h2>
+            <div class="programs-grid" id="bit-programs"></div>
+        </div>
+
+        <div id="oop" class="tab-content">
+            <h2>🏗️ Object-Oriented Programming</h2>
+            <div class="programs-grid" id="oop-programs"></div>
+        </div>
+    </div>
+
+    <!-- Code Modal -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Code Viewer</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="codeContent" class="code-content">Loading...</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-view" onclick="closeModal()">Close</button>
+                <button class="btn btn-view" onclick="copyCode()">Copy Code</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Embedded code database for static deployment
+        const codeDatabase = {
+            'Array/binary.java': `package Array;
+
+import java.util.*;
+
+public class binary {
+    public static void sort(int arr[]) {
+        int temp;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+    
+    public static int search(int arr[], int item) {
+        int start = 0, end = arr.length - 1;
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (arr[mid] == item) {
+                return mid; 
+            } else if (arr[mid] < item) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        System.out.println("Enter array elements");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.print("Enter item to search: ");
+        int item = sc.nextInt();
+        sort(arr);
+        System.out.println("Sorted array is");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        int res = search(arr, item);
+        if (res != -1) {
+            System.out.println("\\nElement found at index: " + res);
+        } else {
+            System.out.println("\\nElement not found");
+        }
+        sc.close();
+    }
+}`,
+
+            'Array/largest.java': `package Array;
+
+import java.util.*;
+
+public class largest {
+    public static void larg(int num[]) {
+        int largest = Integer.MIN_VALUE;
+        int smallest = Integer.MAX_VALUE;
+        for (int i = 0; i < num.length; i++) {
+            if (largest < num[i]) {
+                largest = num[i];
+            }
+            if (smallest > num[i]) {
+                smallest = num[i];
+            }
+        }
+        System.out.println("The largest value is: " + largest);
+        System.out.println("The smallest value is: " + smallest);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        System.out.print("Enter array elements: ");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+        larg(arr);
+        sc.close();
+    }
+}`,
+
+            'Array/linearSearch.java': `package Array;
+
+import java.util.*;
+
+public class linearSearch {
+    public static int search(int numbers[], int key) {
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] == key) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+        int numbers[] = new int[n];
+        
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) {
+            numbers[i] = sc.nextInt();
+        }
+        
+        System.out.print("Enter element to search: ");
+        int key = sc.nextInt();
+        
+        int index = search(numbers, key);
+        if (index == -1) {
+            System.out.println("Element not found");
+        } else {
+            System.out.println("Element found at index: " + index);
+        }
+        sc.close();
+    }
+}`,
+
+            'Array/kadane.java': `package Array;
+
+public class kadane {
+    public static void kadanes(int numbers[]) {
+        int ms = Integer.MIN_VALUE; // max sum
+        int cs = 0; // current sum
+        
+        for (int i = 0; i < numbers.length; i++) {
+            cs = cs + numbers[i];
+            if (cs < 0) {
+                cs = 0;
+            }
+            ms = Math.max(cs, ms);
+        }
+        System.out.println("Maximum subarray sum is: " + ms);
+    }
+
+    public static void main(String[] args) {
+        int numbers[] = {-2, -3, 4, -1, -2, 1, 5, -3};
+        kadanes(numbers);
+    }
+}`,
+
+            'Array/rev.java': `package Array;
+
+public class rev {
+    public static void reverse(int numbers[]) {
+        int first = 0, last = numbers.length - 1;
+        
+        while (first < last) {
+            // swap
+            int temp = numbers[last];
+            numbers[last] = numbers[first];
+            numbers[first] = temp;
+            
+            first++;
+            last--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int numbers[] = {2, 4, 6, 8, 10};
+        
+        System.out.println("Original array:");
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.print(numbers[i] + " ");
+        }
+        
+        reverse(numbers);
+        
+        System.out.println("\\nReversed array:");
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.print(numbers[i] + " ");
+        }
+    }
+}`,
+
+            'String/palindrome.java': `package String;
+
+import java.util.Scanner;
+
+public class palindrome {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string to check for palindrome: ");
+        String str = sc.nextLine();
+        str = str.toLowerCase();
+        if (isPalindrome(str)) {
+            System.out.println(str + " is a palindrome.");
+        } else {
+            System.out.println(str + " is not a palindrome.");
+        }
+        sc.close();
+    }
+    
+    public static boolean isPalindrome(String str) {
+        for (int i = 0; i < str.length() / 2; i++) {
+            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}`,
+
+            'String/compress.java': `package String;
+
+public class compress {
+    public static String compress(String str) {
+        String newStr = "";
+        
+        for (int i = 0; i < str.length(); i++) {
+            Integer count = 1;
+            while (i < str.length() - 1 && str.charAt(i) == str.charAt(i + 1)) {
+                count++;
+                i++;
+            }
+            newStr += str.charAt(i);
+            if (count > 1) {
+                newStr += count.toString();
+            }
+        }
+        return newStr;
+    }
+
+    public static void main(String[] args) {
+        String str = "aaabbcccdd";
+        System.out.println("Original string: " + str);
+        System.out.println("Compressed string: " + compress(str));
+    }
+}`,
+
+            'String/largest.java': `package String;
+
+public class largest {
+    public static String largestString(String fruits[]) {
+        String largest = fruits[0];
+        for (int i = 1; i < fruits.length; i++) {
+            if (largest.compareTo(fruits[i]) < 0) {
+                largest = fruits[i];
+            }
+        }
+        return largest;
+    }
+
+    public static void main(String[] args) {
+        String fruits[] = {"apple", "mango", "banana"};
+        System.out.println("Largest string is: " + largestString(fruits));
+    }
+}`,
+
+            'String/strings.java': `package String;
+
+import java.util.Scanner;
+
+public class strings {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // String input
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        
+        // String operations
+        System.out.println("Hello " + name);
+        System.out.println("Length: " + name.length());
+        System.out.println("Uppercase: " + name.toUpperCase());
+        System.out.println("Lowercase: " + name.toLowerCase());
+        
+        sc.close();
+    }
+}`,
+
+            'Sorting/Bubble.java': `package Sorting;
+
+public class Bubble {
+    public static void bubbleSort(int arr[]) {
+        for (int turn = 0; turn < arr.length - 1; turn++) {
+            for (int j = 0; j < arr.length - 1 - turn; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // swap
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void printArr(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {5, 4, 1, 3, 2};
+        System.out.println("Original array:");
+        printArr(arr);
+        
+        bubbleSort(arr);
+        
+        System.out.println("Sorted array:");
+        printArr(arr);
+    }
+}`,
+
+            'Sorting/insertion.java': `package Sorting;
+
+public class insertion {
+    public static void insertionSort(int arr[]) {
+        for (int i = 1; i < arr.length; i++) {
+            int curr = arr[i];
+            int prev = i - 1;
+            
+            // finding out the correct pos to insert
+            while (prev >= 0 && arr[prev] > curr) {
+                arr[prev + 1] = arr[prev];
+                prev--;
+            }
+            
+            // insertion
+            arr[prev + 1] = curr;
+        }
+    }
+
+    public static void printArr(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {5, 4, 1, 3, 2};
+        System.out.println("Original array:");
+        printArr(arr);
+        
+        insertionSort(arr);
+        
+        System.out.println("Sorted array:");
+        printArr(arr);
+    }
+}`,
+
+            'Sorting/selessctionSort.java': `package Sorting;
+
+public class selessctionSort {
+    public static void selectionSort(int arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minPos = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[minPos] > arr[j]) {
+                    minPos = j;
+                }
+            }
+            // swap
+            int temp = arr[minPos];
+            arr[minPos] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    public static void printArr(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {5, 4, 1, 3, 2};
+        System.out.println("Original array:");
+        printArr(arr);
+        
+        selectionSort(arr);
+        
+        System.out.println("Sorted array:");
+        printArr(arr);
+    }
+}`,
+
+            'OOPs/objects.java': `package OOPs;
+
+class Pen {
+    String color;
+    String type; // ballpoint; gel
+    
+    public void write() {
+        System.out.println("Writing something");
+    }
+    
+    public void printColor() {
+        System.out.println(this.color);
+    }
+}
+
+class Student {
+    String name;
+    int age;
+    
+    public void printInfo() {
+        System.out.println(this.name);
+        System.out.println(this.age);
+    }
+}
+
+public class objects {
+    public static void main(String[] args) {
+        Pen pen1 = new Pen();
+        pen1.color = "blue";
+        pen1.type = "gel";
+        
+        Pen pen2 = new Pen();
+        pen2.color = "black";
+        pen2.type = "ballpoint";
+        
+        pen1.printColor();
+        pen2.printColor();
+        
+        Student s1 = new Student();
+        s1.name = "Aman";
+        s1.age = 24;
+        s1.printInfo();
+    }
+}`,
+
+            'BitManipulation/even.java': `package BitManipulation;
+
+import java.util.*;
+
+public class even {
+    public static void oddOrEven(int n) {
+        int bitMask = 1;
+        if ((n & bitMask) == 0) {
+            // even number
+            System.out.println("Even number");
+        } else {
+            System.out.println("Odd number");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+        oddOrEven(n);
+        sc.close();
+    }
+}`,
+
+            'Pattern/simple.java': `package Pattern;
+
+public class simple {
+    public static void main(String[] args) {
+        // Star pattern
+        for (int line = 1; line <= 4; line++) {
+            for (int star = 1; star <= line; star++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        
+        System.out.println();
+        
+        // Number pattern
+        for (int line = 1; line <= 4; line++) {
+            for (int number = 1; number <= line; number++) {
+                System.out.print(number);
+            }
+            System.out.println();
+        }
+    }
+}`,
+
+            'TwoDArray/matrix.java': `package TwoDArray;
+
+import java.util.*;
+
+public class matrix {
+    public static boolean search(int matrix[][], int key) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == key) {
+                    System.out.println("Found at cell (" + i + "," + j + ")");
+                    return true;
+                }
+            }
+        }
+        System.out.println("Key not found");
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int matrix[][] = new int[3][3];
+        int n = matrix.length, m = matrix[0].length;
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter matrix elements:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        
+        // Output
+        System.out.println("Matrix:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        
+        System.out.print("Enter key to search: ");
+        int key = sc.nextInt();
+        search(matrix, key);
+        sc.close();
+    }
+}`
+        };
+
+        // Program data
+        const programs = {
+            array: [
+                {name: "Binary Search", file: "Array/binary.java", desc: "Binary search with sorting implementation"},
+                {name: "Largest Element", file: "Array/largest.java", desc: "Find largest and smallest elements"},
+                {name: "Linear Search", file: "Array/linearSearch.java", desc: "Linear search algorithm"},
+                {name: "Kadane's Algorithm", file: "Array/kadane.java", desc: "Maximum subarray problem"},
+                {name: "Reverse Array", file: "Array/rev.java", desc: "Array reversal algorithm"},
+            ],
+            string: [
+                {name: "Palindrome Check", file: "String/palindrome.java", desc: "Check if string is palindrome"},
+                {name: "String Compression", file: "String/compress.java", desc: "Compress repeated characters"},
+                {name: "Largest String", file: "String/largest.java", desc: "Find lexicographically largest string"},
+                {name: "String Operations", file: "String/strings.java", desc: "Basic string operations and methods"},
+            ],
+            sorting: [
+                {name: "Bubble Sort", file: "Sorting/Bubble.java", desc: "Bubble sort algorithm implementation"},
+                {name: "Insertion Sort", file: "Sorting/insertion.java", desc: "Insertion sort algorithm"},
+                {name: "Selection Sort", file: "Sorting/selessctionSort.java", desc: "Selection sort algorithm"},
+            ],
+            pattern: [
+                {name: "Simple Pattern", file: "Pattern/simple.java", desc: "Basic star and number patterns"},
+            ],
+            "2darray": [
+                {name: "Matrix Operations", file: "TwoDArray/matrix.java", desc: "Basic matrix operations and search"},
+            ],
+            bit: [
+                {name: "Even/Odd Check", file: "BitManipulation/even.java", desc: "Check even/odd using bit manipulation"},
+            ],
+            oop: [
+                {name: "Objects & Classes", file: "OOPs/objects.java", desc: "Basic OOP concepts with Pen and Student classes"}
+            ]
+        };
+
+        // Show tab function
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName !== 'overview') {
+                loadPrograms(tabName);
+            }
+        }
+
+        // Load programs for a category
+        function loadPrograms(category) {
+            const container = document.getElementById(category + '-programs');
+            if (!container || container.innerHTML.trim() !== '') return;
+
+            const categoryPrograms = programs[category] || [];
+            container.innerHTML = categoryPrograms.map(program => `
+                <div class="program-card">
+                    <div class="program-title">${program.name}</div>
+                    <div class="program-desc">${program.desc}</div>
+                    <div class="card-actions">
+                        <button class="btn btn-view" onclick="viewCode('${program.file}')">View Code</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // View code function for static deployment
+        function viewCode(filePath) {
+            const modal = document.getElementById('codeModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('codeContent');
+
+            title.textContent = `Source Code - ${filePath}`;
+            modal.style.display = 'block';
+
+            // Get code from embedded database
+            const code = codeDatabase[filePath];
+            if (code) {
+                content.textContent = code;
+            } else {
+                content.textContent = `// Code for ${filePath} not available in static version\n// Add your code to the codeDatabase object`;
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('codeModal').style.display = 'none';
+        }
+
+        // Copy code
+        function copyCode() {
+            const content = document.getElementById('codeContent');
+            navigator.clipboard.writeText(content.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('codeModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPrograms('array');
+        });
+    </script>
+</body>
+</html>
