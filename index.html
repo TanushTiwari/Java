@@ -1155,14 +1155,14 @@ public class matrix {
             ]
         };
 
-        // View code function - Updated to use GitHub API
+        // View code function - GitHub API with fallback
         async function viewCode(filePath) {
             const modal = document.getElementById('codeModal');
             const title = document.getElementById('modalTitle');
             const content = document.getElementById('codeContent');
 
             title.textContent = `Source Code - ${filePath}`;
-            content.textContent = 'Loading code from GitHub...';
+            content.textContent = '🔄 Loading latest code from GitHub...';
             modal.style.display = 'block';
 
             try {
@@ -1175,13 +1175,28 @@ public class matrix {
                     // GitHub API returns base64 encoded content
                     const code = atob(data.content);
                     content.textContent = code;
+                    
+                    // Add a footer showing it's from GitHub
+                    content.textContent += `\n\n// ✅ Loaded from GitHub: https://github.com/TanushTiwari/Java/blob/main/${filePath}`;
                 } else if (response.status === 404) {
-                    content.textContent = `// File not found: ${filePath}\n// Please check if the file exists in your repository`;
+                    // Fallback to embedded code if file not found
+                    const embeddedCode = codeDatabase[filePath];
+                    if (embeddedCode) {
+                        content.textContent = embeddedCode + `\n\n// ⚠️ Fallback: File not found in repository, showing cached version`;
+                    } else {
+                        content.textContent = `// ❌ File not found: ${filePath}\n// Please check if the file exists in your repository\n// Repository: https://github.com/TanushTiwari/Java`;
+                    }
                 } else {
-                    content.textContent = `// Error loading file: ${filePath}\n// HTTP Status: ${response.status}`;
+                    content.textContent = `// ❌ Error loading file: ${filePath}\n// HTTP Status: ${response.status}\n// Repository: https://github.com/TanushTiwari/Java`;
                 }
             } catch (error) {
-                content.textContent = `// Network error loading file: ${filePath}\n// Error: ${error.message}\n// Make sure you have internet connection`;
+                // Fallback to embedded code on network error
+                const embeddedCode = codeDatabase[filePath];
+                if (embeddedCode) {
+                    content.textContent = embeddedCode + `\n\n// ⚠️ Network error - showing cached version\n// Error: ${error.message}`;
+                } else {
+                    content.textContent = `// ❌ Network error loading file: ${filePath}\n// Error: ${error.message}\n// Please check your internet connection`;
+                }
             }
         }
 
