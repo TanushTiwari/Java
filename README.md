@@ -1,17 +1,13 @@
-📘 Shradha Didi’s DSA Playlist in C++ – with Vikash Gupta's Practice Journey
+📘 DSA Playlist in C++
 
 
 
 
-📍 This repository contains my structured learning path and solved problems based on Shradha Didi’s DSA Playlist in C++, with full dedication to cracking interviews, contests, and building strong problem-solving skills.
+📍 This repository contains my structured learning path and solved problems based on Shradha Didi’s DSA Playlist in C++, with full dedication to building strong problem-solving skills.
 
 🧑‍💻 About Me
 Hi, I'm Tanush Tiwari
-🧠 Passionate about DSA, OS, and Dev Projects
-
-💡 Exploring modern tech stacks like Web3, MongoDB, and building real-life platforms
-
-🚀 Active participant in Hackathons and Open Source
+🧠 Passionate about DSA
 
 📂 Repository Structure
 This repository is organized topic-wise, matching Shradha Didi’s playlist. Each topic contains:
@@ -23,11 +19,6 @@ This repository is organized topic-wise, matching Shradha Didi’s playlist. Eac
 📄 Detailed comments for clarity
 
 🚀 Frequently used patterns
-
-
-📚 Resources Used
-📺 YouTube Playlist by Shradha Didi (Apna College)
-DSA in C++ – Full Playlist
 
 📘 Language: C++
 
@@ -64,15 +55,3 @@ This is my personal DSA learning journey, but feel free to:
 ⭐ Star this repo to support!
 
 👀 Watch for updates
-
-🛠️ Fork and use it as your learning base!
-
-📧 Contact Me
-If you want to collaborate, suggest improvements, or just want to say hi:
-
-🧠 Let’s Ace DSA Together!
-“Consistency + Practice = Mastery” 🚀
-Follow Shradha Didi’s playlist, stay consistent, and watch yourself grow.
-
-💻 Repo Link
-👉 Click here to visit the repo
