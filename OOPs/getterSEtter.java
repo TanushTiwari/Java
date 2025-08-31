@@ -1,20 +1,21 @@
 package OOPs;
 
-public class objects {
+public class getterSEtter {
     public static void main(String[] args) {
 
         Pen p1= new Pen(); // created a pen object called p1
         p1.setColor("Blue");
-        System.out.println(p1.color);
+        System.out.println(p1.getColor());
         p1.setTip(5);
-        System.out.println(p1.tip);
+        System.out.println(p1.getTip());
         p1.color="Yellow"; // Directly changing the property of the object
-        System.out.println(p1.color);
+        System.out.println(p1.getColor());
 
         BankAccount b1=new BankAccount();
         b1.username="Vikash";
         b1.setPassword("abcd1234");
     }
+    
 }
 class Pen{
     //Properties
@@ -63,5 +64,6 @@ class Student{
     }
 }
 
-/*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              '
+/*
+This part is taking time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              '
 */
