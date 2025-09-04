@@ -21,6 +21,14 @@ public class GetterSetterDemo {
     }
 }
 
+
+//Shalow copy constructor
+
+//Deep copy constructor
+//Loop to copy all the values from one object to another
+//lasy copy
+//copy the reference of one object to another
+//Destructor-Garbage collector (Automatic memory management)
 class Pen {
     // Properties should be private
     private String color;
@@ -93,4 +101,7 @@ class Student {
 }
 
 /*
+Shallow & Deeep copy
+
+
  */
