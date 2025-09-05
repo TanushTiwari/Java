@@ -14,7 +14,7 @@ public class fibbo {
         if (n == 1) {
             return 1;
         }
-        int fnm1 = fibbo(n - 1);
+        int fnm1 = fibbo(n - 1);    
         int fnm2 = fibbo(n - 2);
         int fn = fnm1 + fnm2;
         // or fn = fibbo(n-1) + fibbo(n-2);
