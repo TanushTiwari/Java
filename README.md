@@ -98,7 +98,6 @@ dsa-portal/
 ## 🌐 GitHub Integration
 
 All programs are linked to the main GitHub repository:
-**https://github.com/vikashgupta16/Shradha-Ma-am-DSA-**
 
 Features:
 - 👁️ **View Code**: See source code in a modal popup
@@ -201,3 +200,4 @@ This project is open source and available under the MIT License.
 **Made with ❤️ for DSA learners everywhere**
 
 *Happy Coding! 🚀*
+
